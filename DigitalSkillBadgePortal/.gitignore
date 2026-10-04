@@ -1,0 +1,34 @@
+# ==============================================================================
+# DigitalSkillBadgePortal - Git Ignore Configuration
+# ==============================================================================
+
+# Maven Build Outputs
+target/
+*.war
+*.jar
+*.class
+
+# IDE Files
+bin/
+.settings/
+.project
+.classpath
+.idea/
+*.iml
+.vscode/
+
+# Credentials & Config
+src/main/resources/db.properties
+!src/main/resources/db.properties.example
+.env
+*.env
+
+# Tomcat & Runtime
+work/
+temp/
+*.log
+logs/
+
+# OS Files
+.DS_Store
+Thumbs.db

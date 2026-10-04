@@ -1,0 +1,17 @@
+# Database Configuration Template for CredWox
+# 
+# For Local Development:
+# Copy this file to 'db.properties' (in this same directory) and adjust credentials.
+# Note: 'db.properties' is gitignored to protect your local database password.
+#
+# For Cloud / Docker Deployment:
+# You do NOT need to create a db.properties file. Simply provide environment variables:
+#   DB_URL (or DATABASE_URL / MYSQL_URL)
+#   DB_USERNAME (or DB_USER / MYSQLUSER)
+#   DB_PASSWORD (or MYSQLPASSWORD / MYSQL_PASSWORD)
+#   DB_DRIVER (optional, defaults to com.mysql.cj.jdbc.Driver)
+
+db.driver=com.mysql.cj.jdbc.Driver
+db.url=jdbc:mysql://localhost:3306/badge_portal?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
+db.username=root
+db.password=
