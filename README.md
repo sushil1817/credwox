@@ -1,10 +1,10 @@
 # CredWox — Woxsen Digital Credential & Verification Portal
 
-> A secure web-based digital credential platform for issuing, managing, and publicly verifying student credentials using unique verification tokens and QR codes.
+A secure web-based digital credential platform for issuing, managing, and publicly verifying student credentials using unique verification tokens and QR codes.
 
-![CredWox](docs/screenshots/credwox-home.png)
+---
 
-## 📌 Project Overview
+## Project Overview
 
 **CredWox** is a Digital Credential & Verification Portal developed for **Woxsen University** to provide a centralized system for issuing, managing, and verifying student digital credentials.
 
@@ -12,11 +12,13 @@ The platform allows authorized faculty members to issue credentials for specific
 
 The system supports the complete credential lifecycle:
 
-**Student → Credential Issuance → Unique Token → QR Code → Public Verification → Status Tracking → Audit History**
+```text
+Student → Credential Issuance → Unique Token → QR Code → Public Verification → Status Tracking → Audit History
+```
 
 ---
 
-## 🎯 Problem Statement
+## Problem Statement
 
 Traditional certificates and skill credentials can be difficult to verify because they often depend on:
 
@@ -32,7 +34,7 @@ CredWox addresses these problems by providing a centralized digital verification
 
 ---
 
-## 💡 Proposed Solution
+## Proposed Solution
 
 CredWox provides a centralized credential management system with:
 
@@ -52,7 +54,7 @@ CredWox provides a centralized credential management system with:
 
 ---
 
-# ✨ Key Features
+# Key Features
 
 ## 1. Digital Credential Issuance
 
@@ -66,8 +68,6 @@ Authorized faculty members can issue digital credentials to students by selectin
 - Initial status
 
 Each credential receives a unique verification code.
-
----
 
 ## 2. Unique Verification Token
 
@@ -84,8 +84,6 @@ CWX-SILV-202607
 ```
 
 The token acts as the credential's unique verification identifier.
-
----
 
 ## 3. QR Code Verification
 
@@ -111,15 +109,13 @@ Credential Status
 Verified Result
 ```
 
----
-
 ## 4. Public Credential Verification
 
 Verification does not require an account.
 
 A user can enter a credential verification code and instantly retrieve the credential information.
 
-The verification page displays information such as:
+The verification page displays:
 
 - Recipient name
 - Student ID
@@ -132,27 +128,21 @@ The verification page displays information such as:
 - Current credential status
 - Verification token
 
----
-
 ## 5. Credential Status Management
 
 CredWox supports three major credential states:
 
-### 🟢 ACTIVE
+### ACTIVE
 
 The credential is valid and currently recognized.
 
-### 🟡 EXPIRED
+### EXPIRED
 
 The credential was legitimately issued but has passed its expiry date.
 
-### 🔴 REVOKED
+### REVOKED
 
 The credential was previously issued but has been withdrawn by the authorized authority.
-
-This makes the system more reliable than simply checking whether a certificate exists.
-
----
 
 ## 6. Faculty Console
 
@@ -168,8 +158,6 @@ The console provides access to:
 - Audit History
 - Public Verification
 
----
-
 ## 7. Credential Registry
 
 The credential registry provides a centralized view of issued credentials.
@@ -183,8 +171,6 @@ Faculty can:
 - Revoke credentials
 - Review issue and expiry information
 
----
-
 ## 8. Skill Module Management
 
 Faculty can create and manage competency modules.
@@ -196,17 +182,6 @@ Each module contains:
 - Competency description
 - Number of credentials issued
 
-Example modules include:
-
-```text
-WT-101
-DS-201
-AI-401
-CS-301
-```
-
----
-
 ## 9. Audit History
 
 CredWox maintains verification activity so that credential verification events can be tracked.
@@ -217,10 +192,6 @@ The audit system helps provide:
 - Credential/token reference
 - Verification activity
 - Status information
-
-This creates an additional layer of accountability.
-
----
 
 ## 10. Responsive Interface
 
@@ -235,43 +206,30 @@ The public verification experience is especially designed for QR-code-based mobi
 
 ---
 
-# 🏗️ System Architecture
+# System Architecture
 
 ```text
-                    ┌──────────────────────┐
-                    │      User / Phone    │
-                    └──────────┬───────────┘
-                               │
-                         QR / Token
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │ Public Verification  │
-                    │       JSP Page       │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │      Servlets        │
-                    │   Business Logic     │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │        JDBC          │
-                    │   Database Access    │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │       MySQL 8        │
-                    │ Credential Database  │
-                    └──────────────────────┘
+                    User / Phone
+                         |
+                     QR / Token
+                         |
+                         v
+                Public Verification
+                       JSP
+                         |
+                         v
+                     Servlets
+                         |
+                         v
+                       JDBC
+                         |
+                         v
+                      MySQL 8
 ```
 
 ---
 
-# 🛠️ Technology Stack
+# Technology Stack
 
 | Technology | Purpose |
 |---|---|
@@ -291,7 +249,7 @@ The public verification experience is especially designed for QR-code-based mobi
 
 ---
 
-# 🗄️ Database Design
+# Database Design
 
 CredWox uses MySQL as its relational database.
 
@@ -317,31 +275,29 @@ Stores issued digital credentials.
 
 Stores credential verification activity.
 
----
-
-## Database Relationship
+### Database Relationship
 
 ```text
 ADMIN
-  │
-  │ issues
-  ▼
-CREDENTIAL ───────────► MODULE
-  │
-  │ belongs to
-  ▼
+  |
+  | issues
+  v
+CREDENTIAL ---------> MODULE
+  |
+  | belongs to
+  v
 STUDENT
 
 CREDENTIAL
-     │
-     │ verification
-     ▼
+     |
+     | verification
+     v
 VERIFICATION_HISTORY
 ```
 
 ---
 
-# 🔐 Security Features
+# Security Features
 
 CredWox incorporates several basic web application security practices:
 
@@ -358,7 +314,7 @@ CredWox incorporates several basic web application security practices:
 
 ---
 
-# 👥 User Roles
+# User Roles
 
 ## Faculty / Administrator
 
@@ -387,7 +343,9 @@ No login is required for public verification.
 
 ---
 
-# 📸 Application Screenshots
+# Application Screenshots
+
+> The image paths below assume you create a `docs/screenshots` folder inside your GitHub repository.
 
 ## 1. CredWox Home Page
 
@@ -412,12 +370,7 @@ The system then checks the credential against the database and displays its curr
 
 ![Public Verification Page](docs/screenshots/public-verification.png)
 
-**Key functionality shown:**
-
-- Verification code input
-- Verify Now button
-- Credential status examples
-- Public access without login
+The page demonstrates public credential verification without requiring the user to log in.
 
 ---
 
@@ -440,7 +393,7 @@ The result includes:
 
 ![Credential Verification Result](docs/screenshots/verification-result.png)
 
-The screenshot demonstrates an **EXPIRED** credential, showing that the system can distinguish between a legitimately issued credential and one that is no longer valid.
+The screenshot demonstrates an expired credential, showing that the system can distinguish between a legitimately issued credential and one that is no longer valid.
 
 ---
 
@@ -466,7 +419,7 @@ The certificate contains:
 
 ![Digital Credential Certificate](docs/screenshots/certificate.png)
 
-The certificate is designed to provide a professional presentation layer while the QR code and verification token provide machine-readable verification.
+The certificate provides a professional presentation layer while the QR code and verification token provide digital verification.
 
 ---
 
@@ -504,8 +457,6 @@ The dashboard displays statistics such as:
 - Verification lookups
 
 ![Faculty Dashboard](docs/screenshots/faculty-dashboard.png)
-
-This provides faculty with a quick overview of the credential ecosystem.
 
 ---
 
@@ -557,132 +508,194 @@ Each module contains a code, name, competency description, and number of credent
 
 ---
 
-# 🔄 Credential Lifecycle
+# How to Add the Screenshots to GitHub
+
+Since your repository currently has:
 
 ```text
-        ┌─────────────┐
-        │   Student   │
-        └──────┬──────┘
-               │
-               ▼
-      ┌─────────────────┐
-      │ Faculty Issues  │
-      │   Credential    │
-      └────────┬────────┘
-               │
-               ▼
-      ┌─────────────────┐
-      │ Unique Token +  │
-      │    QR Code      │
-      └────────┬────────┘
-               │
-               ▼
-      ┌─────────────────┐
-      │ Credential      │
-      │    ACTIVE       │
-      └────────┬────────┘
-               │
-        ┌──────┴───────┐
-        │              │
-        ▼              ▼
-   ┌─────────┐    ┌─────────┐
-   │ EXPIRED │    │ REVOKED │
-   └─────────┘    └─────────┘
+credwox
+└── DigitalSkillBadgePortal
+```
+
+I recommend putting the screenshots here:
+
+```text
+credwox
+└── DigitalSkillBadgePortal
+    ├── docs
+    │   ├── PROJECT_GUIDE.md
+    │   └── screenshots
+    │       ├── home-page.png
+    │       ├── public-verification.png
+    │       ├── verification-result.png
+    │       ├── certificate.png
+    │       ├── faculty-login.png
+    │       ├── student-login.png
+    │       ├── faculty-dashboard.png
+    │       ├── issue-credential.png
+    │       ├── credential-registry.png
+    │       └── skill-modules.png
+    ├── src
+    ├── database
+    ├── pom.xml
+    └── README.md
+```
+
+### In GitHub Desktop
+
+1. Open your `webtech pbl` folder.
+2. Open:
+
+```text
+DigitalSkillBadgePortal
+```
+
+3. Create:
+
+```text
+docs
+```
+
+4. Inside `docs`, create:
+
+```text
+screenshots
+```
+
+5. Put your screenshots inside that folder.
+6. Rename them exactly according to the names used above.
+7. Open GitHub Desktop.
+8. You will see the screenshots under **Changes**.
+9. Enter a commit message:
+
+```text
+Add project screenshots and documentation
+```
+
+10. Click **Commit to master**.
+11. Click **Push origin**.
+
+After pushing, GitHub will automatically display the images inside the README.
+
+---
+
+# Important: Where the README Should Be
+
+Because your GitHub repository currently contains:
+
+```text
+credwox/
+└── DigitalSkillBadgePortal/
+```
+
+and your actual Maven project is inside `DigitalSkillBadgePortal`, the easiest option is to keep the main README here:
+
+```text
+DigitalSkillBadgePortal/README.md
+```
+
+However, if you want the README to appear **directly on the main GitHub repository homepage**, the better structure is:
+
+```text
+credwox/
+├── README.md
+└── DigitalSkillBadgePortal/
+    ├── src/
+    ├── database/
+    ├── docs/
+    │   └── screenshots/
+    └── pom.xml
+```
+
+In that case, the image paths in the root README should be:
+
+```markdown
+![CredWox Home Page](DigitalSkillBadgePortal/docs/screenshots/home-page.png)
+```
+
+instead of:
+
+```markdown
+![CredWox Home Page](docs/screenshots/home-page.png)
+```
+
+For your current repository, **I recommend the second structure** because anyone opening `https://github.com/sushil1817/credwox` will immediately see the project description and screenshots.
+
+---
+
+# Credential Lifecycle
+
+```text
+Student
+   |
+   v
+Faculty Issues Credential
+   |
+   v
+Unique Verification Token
+   |
+   v
+QR Code Generated
+   |
+   v
+Credential Registered in Database
+   |
+   v
+Public Verification
+   |
+   +----------+----------+
+   |          |          |
+   v          v          v
+ ACTIVE    EXPIRED    REVOKED
 ```
 
 ---
 
-# 📱 QR Verification Workflow
-
-The QR verification process is designed for real-world certificate verification.
+# QR Verification Workflow
 
 ```text
 1. Student receives digital credential
-              ↓
+              |
+              v
 2. Credential contains QR code
-              ↓
+              |
+              v
 3. Employer / institution scans QR
-              ↓
+              |
+              v
 4. Verification page opens
-              ↓
+              |
+              v
 5. Credential token is checked
-              ↓
+              |
+              v
 6. Database validates credential
-              ↓
+              |
+              v
 7. Current status is displayed
 ```
 
-This removes the need for manual certificate verification.
-
 ---
 
-# 📊 Example Credential Information
-
-A verified credential can contain information such as:
-
-```text
-Recipient:
-Student Name
-
-Student ID:
-25WUXXXXXXXX
-
-Course:
-B.Tech Computer Science & Engineering
-
-Skill Module:
-Cloud Native Systems & Container Orchestration
-
-Module Code:
-CS-301
-
-Credential Tier:
-Silver
-
-Verification Token:
-CWX-SILV-202607
-
-Status:
-ACTIVE
-
-Issuing Authority:
-Prof. Veeresh Biradar (Dept. Head)
-
-Role:
-Program Coordinator & Authorized Signatory
-```
-
----
-
-# 📁 Project Structure
+# Project Structure
 
 ```text
 DigitalSkillBadgePortal/
-│
+|
 ├── database/
 │   ├── schema.sql
 │   └── seed.sql
-│
+|
 ├── docs/
-│   └── PROJECT_GUIDE.md
-│
+│   ├── PROJECT_GUIDE.md
+│   └── screenshots/
+|
 ├── src/
 │   └── main/
 │       ├── java/
-│       │   └── ...
-│       │
 │       ├── resources/
-│       │   └── db.properties.example
-│       │
 │       └── webapp/
-│           ├── css/
-│           ├── js/
-│           ├── images/
-│           ├── WEB-INF/
-│           ├── certificate.jsp
-│           ├── verify.jsp
-│           └── ...
-│
+|
 ├── pom.xml
 ├── README.md
 └── .gitignore
@@ -690,11 +703,11 @@ DigitalSkillBadgePortal/
 
 ---
 
-# ⚙️ Local Setup
+# Local Setup
 
 ## Prerequisites
 
-Install the following:
+Install:
 
 - Java 17
 - Apache Tomcat 9
@@ -702,9 +715,7 @@ Install the following:
 - Maven
 - Git
 
----
-
-## 1. Clone the Repository
+## Clone the Repository
 
 ```bash
 git clone https://github.com/sushil1817/credwox.git
@@ -714,19 +725,7 @@ git clone https://github.com/sushil1817/credwox.git
 cd credwox
 ```
 
----
-
-## 2. Open the Project
-
-Navigate to:
-
-```text
-DigitalSkillBadgePortal
-```
-
----
-
-## 3. Configure MySQL
+## Configure MySQL
 
 Create the database using:
 
@@ -740,9 +739,7 @@ Then populate the initial data using:
 database/seed.sql
 ```
 
----
-
-## 4. Configure Database Connection
+## Configure Database Connection
 
 Create your local:
 
@@ -758,11 +755,7 @@ src/main/resources/db.properties.example
 
 Do not commit database passwords or other secrets to GitHub.
 
----
-
-## 5. Build the Application
-
-Run:
+## Build the Application
 
 ```bash
 mvn clean package
@@ -774,9 +767,7 @@ The generated WAR file will be available inside:
 target/
 ```
 
----
-
-## 6. Deploy to Tomcat
+## Deploy to Tomcat
 
 Copy the generated WAR file to the Tomcat `webapps` directory.
 
@@ -788,11 +779,9 @@ http://localhost:8080/DigitalSkillBadgePortal/
 
 ---
 
-# 🧪 Testing
+# Testing
 
-The application can be tested through the following flows:
-
-### Public Verification
+## Public Verification
 
 ```text
 Home
@@ -802,7 +791,7 @@ Home
  → View Credential Status
 ```
 
-### Faculty Workflow
+## Faculty Workflow
 
 ```text
 Faculty Login
@@ -814,7 +803,7 @@ Faculty Login
  → Revoke Credential
 ```
 
-### QR Workflow
+## QR Workflow
 
 ```text
 Certificate
@@ -825,25 +814,23 @@ Certificate
 
 ---
 
-# 🏆 Credential Tiers
+# Credential Tiers
 
-CredWox supports multiple credential levels to represent different achievement levels.
-
-### 🥉 Bronze
+## Bronze
 
 Foundational competency.
 
-### 🥈 Silver
+## Silver
 
 Intermediate competency and demonstrated practical skills.
 
-### 🥇 Gold
+## Gold
 
 Advanced mastery and high-level achievement.
 
 ---
 
-# 📈 Future Scope
+# Future Scope
 
 The project can be further expanded with:
 
@@ -864,116 +851,60 @@ The project can be further expanded with:
 
 ---
 
-# 🔮 Future Deployment Architecture
-
-```text
-                    Internet
-                       │
-                       ▼
-                ┌──────────────┐
-                │ Public HTTPS │
-                │   CredWox    │
-                └──────┬───────┘
-                       │
-                       ▼
-                ┌──────────────┐
-                │ Apache       │
-                │ Tomcat 9     │
-                └──────┬───────┘
-                       │
-                       ▼
-                ┌──────────────┐
-                │ Java/JSP/    │
-                │ Servlets     │
-                └──────┬───────┘
-                       │
-                       ▼
-                ┌──────────────┐
-                │   MySQL 8    │
-                └──────────────┘
-```
-
----
-
-# 🔐 Why CredWox?
-
-CredWox combines a traditional academic credential system with modern digital verification.
-
-Instead of relying only on a certificate document, the system creates a verifiable digital record behind every credential.
-
-This means that:
-
-**A certificate can be presented visually, while its authenticity can be verified digitally.**
-
----
-
-# 👨‍💻 Project Information
+# Project Information
 
 **Project Name:** CredWox
 
-**Full Name:**  
-CredWox — Woxsen Digital Credential & Verification Portal
+**Full Name:** CredWox — Woxsen Digital Credential & Verification Portal
 
-**Institution:**  
-Woxsen University
+**Institution:** Woxsen University
 
-**School:**  
-School of Technology
+**School:** School of Technology
 
-**Project Type:**  
-Web Technology PBL Project
+**Project Type:** Web Technology PBL Project
 
-**Technology:**  
-Java Web Application
+**Backend:** Java 17, Servlets, JSP, JDBC
 
-**Backend:**  
-Java 17, Servlets, JSP, JDBC
+**Database:** MySQL 8
 
-**Database:**  
-MySQL 8
+**Server:** Apache Tomcat 9
 
-**Server:**  
-Apache Tomcat 9
+**Build Tool:** Maven
 
-**Build Tool:**  
-Maven
-
-**Version Control:**  
-Git & GitHub
+**Version Control:** Git & GitHub
 
 ---
 
-# 👤 Authorized Signatory
+# Authorized Signatory
 
 **Prof. Veeresh Biradar (Dept. Head)**
 
-**Program Coordinator & Authorized Signatory**
+Program Coordinator & Authorized Signatory
 
 Woxsen University
 
 ---
 
-# 📜 License
+# Project Summary
 
-This project is developed as an academic Web Technology PBL project for Woxsen University.
-
----
-
-# ⭐ Project Summary
-
-**CredWox is a centralized digital credential platform that allows authorized faculty to issue secure, QR-enabled credentials and enables students, employers, institutions, and other users to verify those credentials instantly through a public verification system.**
+CredWox is a centralized digital credential platform that allows authorized faculty to issue secure, QR-enabled credentials and enables students, employers, institutions, and other users to verify those credentials through a public verification system.
 
 ```text
-Issue → Register → Generate Token → Generate QR
-                         ↓
-                    Verify Online
-                         ↓
-              ACTIVE / EXPIRED / REVOKED
+Issue
+  ↓
+Register
+  ↓
+Generate Token
+  ↓
+Generate QR
+  ↓
+Verify Online
+  ↓
+ACTIVE / EXPIRED / REVOKED
 ```
 
 ---
 
-## 🔗 Repository
+# Repository
 
-**GitHub:**  
 https://github.com/sushil1817/credwox.git
