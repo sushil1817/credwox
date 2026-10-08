@@ -34,7 +34,12 @@ public class HealthServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("OK");
         out.println("Status: UP");
-        out.println("Database: " + (dbConnected ? "CONNECTED" : "DISCONNECTED_OR_STARTING"));
+        out.println("Database: " + (dbConnected ? "CONNECTED" : "DISCONNECTED"));
+        if (!dbConnected) {
+            out.println("Database_Error: " + DBUtil.getLastConnectionError());
+        }
+        out.println("Configured_URL: " + DBUtil.getSanitizedUrl());
+        out.println("Configured_User: " + DBUtil.getUsername());
         out.flush();
     }
 }

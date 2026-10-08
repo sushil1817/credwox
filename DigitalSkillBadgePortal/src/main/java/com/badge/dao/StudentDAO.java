@@ -57,6 +57,12 @@ public class StudentDAO {
         return false;
     }
 
+    private String lastError = null;
+
+    public String getLastError() {
+        return lastError;
+    }
+
     /**
      * Authenticates a student using either their email or student ID and plain-text password.
      * @param identifier email or student ID
@@ -64,6 +70,7 @@ public class StudentDAO {
      * @return Student object if valid, null otherwise
      */
     public Student authenticate(String identifier, String plainPassword) {
+        lastError = null;
         String sql = "SELECT id, student_id, name, email, password, course, created_at FROM students WHERE email = ? OR student_id = ?";
         Connection conn = null;
         PreparedStatement ps = null;
@@ -90,6 +97,7 @@ public class StudentDAO {
                 }
             }
         } catch (SQLException e) {
+            lastError = e.getMessage();
             LOGGER.log(Level.SEVERE, "Error authenticating student with identifier: " + identifier, e);
         } finally {
             DBUtil.closeQuietly(rs, ps, conn);

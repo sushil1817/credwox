@@ -50,7 +50,12 @@ public class StudentLoginServlet extends HttpServlet {
             session.setAttribute("role", "STUDENT");
             response.sendRedirect(request.getContextPath() + "/student/dashboard");
         } else {
-            request.setAttribute("errorMessage", "Invalid Student ID / Email or password. Please try again.");
+            String dbErr = studentDAO.getLastError();
+            if (dbErr != null) {
+                request.setAttribute("errorMessage", "Database error: " + dbErr);
+            } else {
+                request.setAttribute("errorMessage", "Invalid Student ID / Email or password. Please try again.");
+            }
             request.setAttribute("prevIdentifier", identifier);
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }

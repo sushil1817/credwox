@@ -51,7 +51,12 @@ public class AdminLoginServlet extends HttpServlet {
             session.setAttribute("role", "ADMIN");
             response.sendRedirect(request.getContextPath() + "/admin/dashboard");
         } else {
-            request.setAttribute("errorMessage", "Invalid administrator credentials.");
+            String dbErr = adminDAO.getLastError();
+            if (dbErr != null) {
+                request.setAttribute("errorMessage", "Database error: " + dbErr);
+            } else {
+                request.setAttribute("errorMessage", "Invalid administrator credentials.");
+            }
             request.setAttribute("prevUsername", username);
             request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
         }

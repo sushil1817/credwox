@@ -57,6 +57,15 @@ public class DBUtil {
         String envUrl = getEnvOrProperty("DB_URL", "DATABASE_URL", "MYSQL_PUBLIC_URL", "MYSQL_URL");
         if (envUrl != null && !envUrl.trim().isEmpty()) {
             url = envUrl.trim();
+        } else {
+            String host = getEnvOrProperty("MYSQLHOST", "DB_HOST");
+            String port = getEnvOrProperty("MYSQLPORT", "DB_PORT");
+            String db = getEnvOrProperty("MYSQLDATABASE", "DB_NAME");
+            if (host != null && !host.trim().isEmpty()) {
+                if (port == null || port.trim().isEmpty()) port = "3306";
+                if (db == null || db.trim().isEmpty()) db = "railway";
+                url = "jdbc:mysql://" + host.trim() + ":" + port.trim() + "/" + db.trim();
+            }
         }
 
         String envUser = getEnvOrProperty("DB_USERNAME", "DB_USER", "MYSQLUSER", "MYSQL_USER", "MYSQL_USERNAME");
@@ -227,17 +236,31 @@ public class DBUtil {
         }
     }
 
+    private static volatile String lastConnectionError = "No connection attempted yet";
+
     /**
      * Helper to test whether the database connection is alive and working.
      * @return true if connection succeeds, false otherwise
      */
     public static boolean testConnection() {
         try (Connection conn = getConnection()) {
-            return conn != null && !conn.isClosed();
+            boolean ok = (conn != null && !conn.isClosed());
+            if (ok) {
+                lastConnectionError = "None (Connection active)";
+            }
+            return ok;
         } catch (SQLException e) {
+            lastConnectionError = e.getMessage();
             LOGGER.log(Level.WARNING, "Connection test failed: " + e.getMessage());
             return false;
         }
+    }
+
+    /**
+     * Retrieves the last recorded database connection error.
+     */
+    public static String getLastConnectionError() {
+        return lastConnectionError;
     }
 
     /**

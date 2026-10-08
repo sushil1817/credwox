@@ -20,6 +20,12 @@ public class AdminDAO {
 
     private static final Logger LOGGER = Logger.getLogger(AdminDAO.class.getName());
 
+    private String lastError = null;
+
+    public String getLastError() {
+        return lastError;
+    }
+
     /**
      * Authenticates an admin by username and plain-text password.
      * @param username admin username
@@ -27,6 +33,7 @@ public class AdminDAO {
      * @return Admin object if authenticated, null otherwise
      */
     public Admin authenticate(String username, String plainPassword) {
+        lastError = null;
         String sql = "SELECT id, username, password, full_name, created_at FROM admins WHERE username = ?";
         Connection conn = null;
         PreparedStatement ps = null;
@@ -50,6 +57,7 @@ public class AdminDAO {
                 }
             }
         } catch (SQLException e) {
+            lastError = e.getMessage();
             LOGGER.log(Level.SEVERE, "Error authenticating admin: " + username, e);
         } finally {
             DBUtil.closeQuietly(rs, ps, conn);
