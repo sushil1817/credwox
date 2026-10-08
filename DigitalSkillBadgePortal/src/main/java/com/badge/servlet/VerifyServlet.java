@@ -28,6 +28,7 @@ public class VerifyServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String code = request.getParameter("code");
+        request.setAttribute("appBaseUrl", com.badge.util.AppUtil.getBaseUrl(request));
         if (code != null && !code.trim().isEmpty()) {
             performVerification(request, response, code.trim());
         } else {
@@ -59,6 +60,7 @@ public class VerifyServlet extends HttpServlet {
 
         request.setAttribute("searched", true);
         request.setAttribute("searchedCode", code);
+        request.setAttribute("appBaseUrl", com.badge.util.AppUtil.getBaseUrl(request));
 
         if (badge == null) {
             // Not found

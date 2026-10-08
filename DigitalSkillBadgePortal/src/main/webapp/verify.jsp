@@ -131,7 +131,8 @@
                                 </div>
 
                                 <div style="margin-top: 14px; text-align: center;">
-                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&margin=3&data=http://localhost:8080${pageContext.request.contextPath}/verify?code=${badge.badgeCode}" 
+                                    <c:set var="resolvedBaseUrl" value="${not empty appBaseUrl ? appBaseUrl : (pageContext.request.scheme.concat('://').concat(pageContext.request.serverName).concat((pageContext.request.serverPort == 80 or pageContext.request.serverPort == 443) ? '' : ':'.concat(pageContext.request.serverPort)).concat(pageContext.request.contextPath))}" />
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&margin=3&data=${resolvedBaseUrl}/verify?code=${badge.badgeCode}" 
                                          alt="Scan to Verify Credential" 
                                          style="width: 80px; height: 80px; border-radius: 8px; border: 1px solid var(--border-color); background: #fff; padding: 3px; display: block; margin: 0 auto 6px;" />
                                     <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 500;">Instant QR Verification</span>

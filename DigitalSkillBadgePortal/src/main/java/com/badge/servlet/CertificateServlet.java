@@ -41,6 +41,7 @@ public class CertificateServlet extends HttpServlet {
         }
 
         request.setAttribute("badge", badge);
+        request.setAttribute("appBaseUrl", com.badge.util.AppUtil.getBaseUrl(request));
         request.getRequestDispatcher("/certificate.jsp").forward(request, response);
     }
 }

@@ -1,0 +1,10 @@
+target/
+.git
+.gitignore
+*.log
+logs/
+.idea/
+.vscode/
+bin/
+**/db.properties
+src/main/resources/db.properties

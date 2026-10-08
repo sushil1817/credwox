@@ -15,4 +15,5 @@ COPY --from=build /app/target/DigitalSkillBadgePortal.war /usr/local/tomcat/weba
 
 EXPOSE 8080
 
-CMD ["catalina.sh", "run"]
+# Adapt Tomcat HTTP port dynamically to Render's $PORT environment variable if set, otherwise default to 8080
+CMD ["sh", "-c", "sed -i 's/port=\"8080\"/port=\"'\"${PORT:-8080}\"'\"/g' /usr/local/tomcat/conf/server.xml && catalina.sh run"]

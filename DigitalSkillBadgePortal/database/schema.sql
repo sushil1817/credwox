@@ -1,7 +1,13 @@
 -- =============================================================================
--- Project: Digital Skill Badge & Verification Portal
--- Database Schema: badge_portal
+-- Project: Digital Skill Badge & Verification Portal (CredWox)
+-- Database Schema: badge_portal / railway
 -- Target RDBMS: MySQL 8.x
+-- =============================================================================
+-- Note:
+-- - For local development: Leave 'CREATE DATABASE ...' and 'USE badge_portal;'.
+-- - For Railway MySQL: You can execute this script as-is (which creates and uses
+--   the 'badge_portal' database on Railway), or if you prefer using Railway's default
+--   'railway' database, you can omit the CREATE DATABASE / USE lines.
 -- =============================================================================
 
 CREATE DATABASE IF NOT EXISTS badge_portal 

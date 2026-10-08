@@ -32,6 +32,10 @@
             <param-value>false</param-value>
         </init-param>
     </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <!-- Default error page mapping -->
     <error-page>

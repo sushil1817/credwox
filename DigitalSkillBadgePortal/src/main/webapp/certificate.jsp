@@ -54,7 +54,8 @@
 
                 <!-- Dynamic Scannable QR Code -->
                 <div style="text-align: center;">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&margin=4&data=http://localhost:8080${pageContext.request.contextPath}/verify?code=${badge.badgeCode}" 
+                    <c:set var="resolvedBaseUrl" value="${not empty appBaseUrl ? appBaseUrl : (pageContext.request.scheme.concat('://').concat(pageContext.request.serverName).concat((pageContext.request.serverPort == 80 or pageContext.request.serverPort == 443) ? '' : ':'.concat(pageContext.request.serverPort)).concat(pageContext.request.contextPath))}" />
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&margin=4&data=${resolvedBaseUrl}/verify?code=${badge.badgeCode}" 
                          alt="Scan to Verify Credential" 
                          style="width: 84px; height: 84px; border: 2px solid #cbd5e1; border-radius: 8px; padding: 2px; background: #fff; display: block; margin: 0 auto 4px;" />
                     <span style="font-size: 0.7rem; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Scan to Verify</span>
