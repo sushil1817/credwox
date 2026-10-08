@@ -4,6 +4,8 @@ A secure web-based digital credential management and verification platform devel
 
 The platform allows students to access their credentials, authorized faculty and administrators to manage credential records, and external users to independently verify credentials using a unique verification code or QR code.
 
+Site link - https://credwox.onrender.com/
+
 ---
 
 ## Submitted By
